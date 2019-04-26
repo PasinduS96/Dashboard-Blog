@@ -1,0 +1,38 @@
+.card {
+	width: 50%;
+}
+
+.logo-form {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+.logout {
+	max-width: 30px;
+	margin-top: 0px;
+}
+
+.card-add {
+	margin: 0 auto;
+	float: none;
+	margin-bottom: 10px;
+}
+
+.bg-image {
+	background-image: url("/pinterest_board_photo.png");
+
+	filter: blur(8px);
+	-webkit-filter: blur(8px);
+
+	height: 100%;
+
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.logo-footer {
+	width: 10%;
+	float: none;
+}
