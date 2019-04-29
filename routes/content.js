@@ -2,42 +2,30 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 
-require('../models/Idea');
-const Idea = mongoose.model('logcontent');
+require('../models/Tickets');
+const TicketContent = mongoose.model('logcontent');
 
 router.get('/add', (req, res) => {
 	res.render('contentlogs/add');
 });
 
-router.get('/', (req, res) => {
-	res.send('contentlogs');
+router.post('/register', (req, res) => {
+	const newUser = {
+		title: req.body.title,
+		content: req.body.details
+	};
+
+	new TicketContent(newUser).save().then((idea) => {
+		res.json({ msg: 'Success' });
+	});
 });
 
-router.post('/', (req, res) => {
-	let errors = [];
-
-	if (!req.body.title) {
-		errors.push({ text: 'Please Add Titile' });
-	}
-	if (!req.body.details) {
-		errors.push({ text: 'Please Provide Details' });
-	}
-	if (errors.length > 0) {
-		res.render('/add', {
-			errors: errors,
-			title: req.body.title,
-			content: req.body.details
+router.get('/', (req, res) => {
+	TicketContent.find({}).sort({}).then((content) => {
+		res.render('contentlogs/index', {
+			content: content
 		});
-	} else {
-		const newUser = {
-			title: req.body.title,
-			content: req.body.details
-		};
-
-		new Idea(newUser).save().then((idea) => {
-			res.redirect('/contentlogs');
-		});
-	}
+	});
 });
 
 module.exports = router;

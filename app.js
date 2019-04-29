@@ -11,10 +11,11 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-require('./models/Idea');
-const LogContent = mongoose.model('logcontent');
+require('./models/Tickets');
+const TicketContent = mongoose.model('logcontent');
 
 const content = require('./routes/content');
+const users = require('./routes/user_details');
 
 mongoose.Promise = global.Promise;
 mongoose
@@ -35,6 +36,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Global variables
+app.use(function(req, res, next) {
+	res.locals.pass_err1 = false;
+	next();
+});
+
 app.get('/', (req, res) => {
 	res.render('index');
 });
@@ -44,6 +51,7 @@ app.get('/about', (req, res) => {
 });
 
 app.use('/contentlogs', content);
+app.use('/users', users);
 
 const port = 5000;
 
