@@ -1,0 +1,19 @@
+{{#if success_msg}}
+  <div class="alert alert-light alert-dismissible" style=" border: 1px solid MediumSeaGreen ;border-radius: 12px;">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span class="badge badge-pill badge-success">Notification</span>
+    </br>
+    </br>
+     <p class="text-success">{{success_msg}}</p>
+  </div>
+{{/if}}
+
+{{#if error}}
+    <div class="alert alert-light alert-dismissible" style=" border: 1px solid red ;border-radius: 12px;">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span class="badge badge-pill badge-danger">Notification</span>
+    </br>
+    </br>
+     <p class="text-danger">{{error}}</p>
+  </div>
+{{/if}}

@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+  <a class="navbar-brand" href="/"><img src="/img/subway_filled.png" class="nav-icon"> TrainTicketsLK</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    {{#if user}}
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/contentlogs">Available Tickets</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" style="float:right;">
+      <li class="nav-item">
+        <a class="nav-link" href="/user/logout"><img src="/img/logout.png" alt="addlogo" class="nav-icon"></a>
+      </li>
+    </ul>
+  {{else}}
+    <ul class="navbar-nav ml-auto" style="float:right;">
+      <li class="nav-item">
+        <a class="nav-link" href="/user/login"><img src="/img/login.png" alt="addlogo" class="nav-icon"></a>
+      </li>
+    </ul>
+  {{/if}}
+  </div>
+</nav>

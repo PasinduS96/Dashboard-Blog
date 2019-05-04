@@ -10,10 +10,7 @@ const TicketsSchema = new Schema({
 		type: String,
 		required: true
 	},
-	// user: {
-	// 	type: String,
-	// 	required: true
-	// },
+
 	price: {
 		type: Number,
 		required: true

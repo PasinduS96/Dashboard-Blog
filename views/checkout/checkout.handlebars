@@ -1,0 +1,124 @@
+<div class="card" style="margin-top:90px;">
+  <div class="card-header bg-primary text-center">
+    <h1 style="color:white; margin-top:10px;" ><img src="/img/checkout.png" alt="flag">&nbsp&nbsp Checkout</h1> 
+  </div>
+  <div class="card-body">
+    <div style="float:right; margin-right:40px; margin-left:40px; margin-top:70px;">
+    <h2 class="card-title">Ticket Details</h2>
+    </br>
+    <div style="font-size:20px;">
+    <p class="card-text"><img src="/img/flag.png" alt="flag"><b>&nbsp&nbsp Destination:</b>&nbsp {{data.destination}}</p>
+    <p class="card-text"><img src="/img/due.png" alt="flag"><b>&nbsp&nbsp Duration:</b>&nbsp {{data.duration}}</p>
+    <p class="card-text"><img src="/img/price.png" alt="flag"><b>&nbsp&nbsp Price:</b>&nbsp Rs.{{data.price}}</p>
+    <p class="card-text"><img src="/img/time.png" alt="flag"><b>&nbsp&nbsp Time:</b>&nbsp {{data.time}}</p>
+    <p class="card-text"><img src="/img/date.png" alt="flag"><b>&nbsp&nbsp Date:</b>&nbsp {{data.date}}</p>
+    <p class="card-text"><img src="/img/loac.png" alt="flag"><b>&nbsp&nbsp Station:</b>&nbsp {{data.station}}</p>
+    </div>
+    </br>
+    </br>
+  </div>
+  <div style="margin-left:20px;">
+
+<script>
+  function enable_text(status)
+  {
+      status=!status;	
+      document.form1.creditcard.disabled = status;
+      document.form1.cvv.disabled = status;
+      document.form1.expdate.disabled = status;
+      document.form1.holder.disabled = status;
+  }
+
+  function enable_text1(status)
+  {
+      status=!status;	
+      document.form1.pin.disabled = status;
+
+  }
+  
+  function ValidateSelection()  
+      {   
+        var boxes = document.getElementsByClassName("form-check-input");  
+        var items = 0;  
+        for(var i = 0; i < boxes.length; i++)  
+        {  
+            if(boxes[i].checked)  
+                items++;  
+        }  
+        if(items > 1)  
+        {  
+            alert("Please Select Only One Payment Method");  
+            return false;  
+        }
+      }
+</script>
+
+<form action="/contentlogs/checkout" method="POST" name="form1">
+<fieldset>  
+<div class="form-row">
+<div class="col-md-10 mb-3">
+  <label for="tickets">Number Of Tickets &nbsp<img src="/img/ticket.png" alt="flag"></label>
+  <input type="number" class="form-control" name="tickets" value="1" min="1"  required>
+</div>
+</div>
+
+
+<div class="form-row">
+<div class="col-md-10 mb-3">
+  <div class="form-check">
+    <input type="checkbox" name="others" class="form-check-input" onclick="enable_text(this.checked);return ValidateSelection();" >
+    <label for="others" class="form-check-label mb-2">&nbspCredit Card Payment &nbsp<img src="/img/visa.png" alt="flag" >&nbsp<img src="/img/amex.png" alt="flag" >&nbsp<img src="/img/mastercar.png" alt="flag" ></label>
+  </div>
+    <input type="text" class="form-control"  name="creditcard" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}" placeholder="Format: 4444-3333-2222-1111" disabled>
+</div>
+</div>
+
+<div class="form-row">
+<div class="col-md-2 mb-3">
+    <input type="text" class="form-control" placeholder="CVV" name="cvv" maxlength="3" pattern="[0-9]" title="Three digit CVV code" disabled>
+</div>
+<div class="col-md-4 mb-3">
+   <input type="date" class="form-control" placeholder="Expire Date" name="expdate"  disabled>
+</div>
+</div>
+
+<div class="form-row">
+<div class="col-md-10 mb-1">
+    <input type="text" class="form-control"  name="holder"  placeholder="Card Holder's Name" pattern="[a-zA-Z\s]+" title="Car Holder's Name Can Not Contain Letters Or Characters" disabled>
+</div>
+</div>
+
+</br>
+
+
+<div class="form-group row mb-1">
+  <div class="col-sm-10 mb-2">Mobile Payment&nbsp&nbsp<img src="/img/mobilep.png" alt="flag">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" class="form-check-input" name="mobilepay" value="true" onclick="enable_text1(this.checked);return ValidateSelection();">
+      <label class="form-check-label mb-2" for="mobilepay">
+          &nbsp(Check if you wish to  pay with your mobile account)
+      </label>
+    </div>
+  </div>
+      <div class="col-sm-4 mb-3">
+    <input type="text" class="form-control" placeholder="PIN" name="pin" maxlength="4" pattern="[0-9]{4}" title="Four digit pin code" disabled>
+    </div>
+</div>
+
+
+<input type="hidden" name="des" value="{{data.destination}}">
+<input type="hidden" name="price" value="{{data.price}}">
+<input type="hidden" name="day" value="{{data.date}}">
+<input type="hidden" name="station" value="{{data.station}}">
+<input type="hidden" name="time" value="{{data.time}}">
+
+<div style="margin-left:50px; margin-right:auto;">
+<button class="buttons buttonC"><h1>Pay Now</h1></button>
+</div>
+</fieldset>
+</form>
+
+</div>  
+</div>
+</br>
+</div>

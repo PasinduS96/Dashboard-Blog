@@ -49,3 +49,35 @@
 	display: block;
 	flex-basis: 19.3%;
 }
+
+.buttons {
+	background-color: #4caf50; /* Green */
+	border: none;
+	color: white;
+	padding: 10px 150px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.buttonC {
+	background-color: #007bff;
+	color: black;
+	border: 2px solid #007bff;
+	border-radius: 12px;
+}
+
+.buttonC:hover {
+	color: white;
+	border-radius: 12px;
+}
+
+.card-c1 {
+	border: 2px solid white;
+	border-radius: 20px;
+}

@@ -1,27 +1,23 @@
-<div class="row" style="margin-top:150px; margin-bottom:80px">
+<div class="row" style="margin-top:10px; margin-bottom:80px">
 <div class="col-md-9 mx-auto">
 <div class="card">
 <div class="card-body">
     <h1 class="text-center">Account Register</h1>
     <img src="/img/logo_transparent.png" alt="logo" style="display: block;margin-left: auto;margin-right: auto;width: 30%">
-    <form>
+    <form action="/user/login" method="POST">
     <div class="form-row mb-4">
-        <label for="name">Email Address</label>
-        <input type="text" class="form-control" id="name" placeholder="email@test.com"  required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
+        <label for="email">Email Address</label>
+        <input type="text" class="form-control" name="email" placeholder="email@test.com"  required>
     </div>
 
     <div class="form-row mb-4">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
+        <input type="password" class="form-control"  name="password" required>
     </div>
-    <a href="/" class="btn btn-primary btn-block">Login</a>
-   
+    <button type="submit" class="btn btn-primary btn-block">Submit</button> 
+</div>
+<div class="card-footer text-center">
+    <p style="font-size:15px">Do not have account yet?&nbsp</p><a class="btn btn-primary btn-lg" href="/user/register" role="button"><img src="/img/user_add.png" alt="addlogo" class="nav-icon">&nbsp&nbsp&nbspRegister Now!</a>
 </div>
 </div>
 </div>

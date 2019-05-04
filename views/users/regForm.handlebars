@@ -1,15 +1,15 @@
-<div class="row" style="margin-bottom:10px;">
+<div class="row" style="margin-bottom:20px;">
 <div class="col-md-9 mx-auto">
 <div class="card">
 <div class="card-body">
     <h1 class="text-center">Account Register</h1>
     <img src="/img/logo_transparent.png" alt="logo" style="display: block;margin-left: auto;margin-right: auto;width: 50%">
-    <form action="/users/register" method="POST">
+    <form action="/user/register" method="POST">
     <div class="container" style="display: block;margin-left: auto;margin-right: auto;width: 100%">
     <div class="form-row">
         <div class="col-md-7 mb-3">
-        <label for="name">Cusromer Name</label>
-        <input type="text" class="form-control" placeholder="Customer Name"  name="name" value="{{name}}" required>
+        <label for="name">Customer Name</label>
+        <input type="text" class="form-control" placeholder="Customer Name"  name="name" pattern="[a-zA-Z\s]+" title="User Name Can Not Contain Letters Or Characters" value="{{name}}" required>
          <div class="invalid-feedback">
             </div>
         </div>
@@ -18,18 +18,26 @@
     <div class="form-row">
         <div class="col-md-7 mb-3">
         <label for="email">Email Address</label>
-        <input type="email" class="form-control" name="email" placeholder="example@example.com" value="{{email}}" required>
+        <input type="email" class="form-control" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="example@example.com" title="characters@characters.domain" value="{{email}}" required>
+        {{#if error3}}
+        </br>
+        <div class="alert alert-light alert-dismissible" style=" border: 1px solid red;border-radius: 12px;">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+             <p class="text-danger">{{error3}}</p>
+        </div>
+        {{else}}
+        {{/if}}
         </div>
     </div>
 
     <div class="form-row">
         <div class="col-md-5 mb-3">
         <label for="nic">National Identity Card(NIC) Number</label>
-        <input type="text" class="form-control" name="nic" placeholder="909090900V" value="{{nic}}" required>
+        <input type="text" class="form-control" name="nic" placeholder="909090900V" pattern="[a-zA-Z0-9]{10}" title="NIC must contain only 10 Characters" value="{{nic}}" required>
         </div>
         <div class="col-md-5 mb-3 mx-4">
         <label for="phone">Phone Nummber</label>
-        <input type="text" class="form-control" name="phone" placeholder="hone" value="{{phone}}" required>
+        <input type="text" class="form-control" name="phone" placeholder="Format:+94716281090" pattern="[\+]\d{2}[0-9]{9}" title="Enter Your phone number with country code, Format:+94716281090" value="{{phone}}" required>
         </div>
         </div>
         <div class="form-row">
@@ -46,7 +54,7 @@
         <div class="row">
         <div class="col-md-5 mb-3">
         <label class="my-1 mr-2" for="password">Password</label>
-        <input name="password" type="password" class="form-control"  value="{{password}}" required>
+        <input name="password" type="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="A Strong password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  value="{{password}}" required>
         {{#if error2}}
         </br>
         <div class="alert alert-light alert-dismissible" style=" border: 1px solid red;border-radius: 12px;">
