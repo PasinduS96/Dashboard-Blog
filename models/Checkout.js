@@ -21,7 +21,7 @@ const CheckoutSchema = new Schema({
 	},
 	discount: {
 		type: String,
-		required: true
+		required: false
 	},
 	count: {
 		type: String,

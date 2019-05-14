@@ -19,9 +19,12 @@ const users = require('./routes/user_details');
 
 mongoose.Promise = global.Promise;
 mongoose
-	.connect('mongodb://localhost/thinkpad-app', {
-		useNewUrlParser: true
-	})
+	.connect(
+		'mongodb+srv://pasi96:pasiya@cluster0-cb5lr.mongodb.net/ticket-app?ssl=true&replicaSet=Pydow-shard-0&authSource=admin&retryWrites=true',
+		{
+			useNewUrlParser: true
+		}
+	)
 	.then(console.log('MongoDB Connected Successfully!!'))
 	.catch((err) => console.log(err));
 
@@ -34,7 +37,7 @@ app.engine(
 app.set('view engine', 'handlebars');
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'client')));
+//app.use(express.static(path.join(__dirname, 'client')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -56,7 +59,6 @@ app.use(flash());
 
 app.use(function(req, res, next) {
 	res.locals.success_msg = req.flash('success_msg');
-	res.locals.error_msg = req.flash('error_msg');
 	res.locals.error = req.flash('error');
 	res.locals.user = req.user || null;
 	next();

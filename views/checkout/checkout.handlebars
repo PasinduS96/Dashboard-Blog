@@ -3,10 +3,10 @@
     <h1 style="color:white; margin-top:10px;" ><img src="/img/checkout.png" alt="flag">&nbsp&nbsp Checkout</h1> 
   </div>
   <div class="card-body">
-    <div style="float:right; margin-right:40px; margin-left:40px; margin-top:70px;">
-    <h2 class="card-title">Ticket Details</h2>
+    <div style="float:right; margin-right:40px; margin-left:40px; margin-top:20px;">
+    <h1 class="card-title text-center">Ticket Details</h1>
     </br>
-    <div style="font-size:20px;">
+    <div style="font-size:23px;">
     <p class="card-text"><img src="/img/flag.png" alt="flag"><b>&nbsp&nbsp Destination:</b>&nbsp {{data.destination}}</p>
     <p class="card-text"><img src="/img/due.png" alt="flag"><b>&nbsp&nbsp Duration:</b>&nbsp {{data.duration}}</p>
     <p class="card-text"><img src="/img/price.png" alt="flag"><b>&nbsp&nbsp Price:</b>&nbsp Rs.{{data.price}}</p>
@@ -16,24 +16,35 @@
     </div>
     </br>
     </br>
+    <div style="font-size:30px;padding-left:50px;">
+    <h2 class="card-text" style="margin-right:100px;"><img src="/img/totalpay.png" alt="flag">&nbsp&nbsp&nbsp<span id="totals"></span> </h2>
+    <h2 class="card-text"><img src="/img/discount.png" alt="flag">&nbsp&nbsp&nbsp
+    {{#if user.type}}
+    <span id="discounts"></span> 
+    {{else}}
+    <span> Rs.0</span>
+    {{/if}}
+    </h2>
+    </div>
   </div>
-  <div style="margin-left:20px;">
 
 <script>
-  function enable_text(status)
-  {
+  function enable_text(status,ename)
+  {   
+    if(ename.name == "others"){
+      
       status=!status;	
       document.form1.creditcard.disabled = status;
       document.form1.cvv.disabled = status;
       document.form1.expdate.disabled = status;
       document.form1.holder.disabled = status;
-  }
 
-  function enable_text1(status)
-  {
+    }
+    if(ename.name == "mobilepay"){
+
       status=!status;	
       document.form1.pin.disabled = status;
-
+    }
   }
   
   function ValidateSelection()  
@@ -51,6 +62,19 @@
             return false;  
         }
       }
+    
+    function total(){
+
+      var price = document.getElementById("tprice").value;
+      var tickets = document.getElementById("count").value;
+
+      var total = (price * tickets);
+      var discount = total * 0.2;
+      var pay = total - discount;
+      document.getElementById("totals").innerHTML = "Rs."+pay;
+      document.getElementById("discounts").innerHTML = "Rs."+discount;
+      
+    }
 </script>
 
 <form action="/contentlogs/checkout" method="POST" name="form1">
@@ -58,7 +82,7 @@
 <div class="form-row">
 <div class="col-md-10 mb-3">
   <label for="tickets">Number Of Tickets &nbsp<img src="/img/ticket.png" alt="flag"></label>
-  <input type="number" class="form-control" name="tickets" value="1" min="1"  required>
+  <input type="number" class="form-control" id="count" name="tickets" value="1" min="1" onclick="total();" required>
 </div>
 </div>
 
@@ -66,7 +90,7 @@
 <div class="form-row">
 <div class="col-md-10 mb-3">
   <div class="form-check">
-    <input type="checkbox" name="others" class="form-check-input" onclick="enable_text(this.checked);return ValidateSelection();" >
+    <input type="checkbox" name="others" class="form-check-input" value="false" onclick="enable_text(this.checked,this);return ValidateSelection();" >
     <label for="others" class="form-check-label mb-2">&nbspCredit Card Payment &nbsp<img src="/img/visa.png" alt="flag" >&nbsp<img src="/img/amex.png" alt="flag" >&nbsp<img src="/img/mastercar.png" alt="flag" ></label>
   </div>
     <input type="text" class="form-control"  name="creditcard" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}" placeholder="Format: 4444-3333-2222-1111" disabled>
@@ -75,7 +99,7 @@
 
 <div class="form-row">
 <div class="col-md-2 mb-3">
-    <input type="text" class="form-control" placeholder="CVV" name="cvv" maxlength="3" pattern="[0-9]" title="Three digit CVV code" disabled>
+    <input type="text" class="form-control" placeholder="CVV" name="cvv" pattern="[0-9]{3}" title="Three digit CVV code" disabled>
 </div>
 <div class="col-md-4 mb-3">
    <input type="date" class="form-control" placeholder="Expire Date" name="expdate"  disabled>
@@ -94,25 +118,25 @@
 <div class="form-group row mb-1">
   <div class="col-sm-10 mb-2">Mobile Payment&nbsp&nbsp<img src="/img/mobilep.png" alt="flag">
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" class="form-check-input" name="mobilepay" value="true" onclick="enable_text1(this.checked);return ValidateSelection();">
+      <input class="form-check-input" type="checkbox" class="form-check-input" name="mobilepay" value="true" onclick="enable_text(this.checked,this);return ValidateSelection();">
       <label class="form-check-label mb-2" for="mobilepay">
           &nbsp(Check if you wish to  pay with your mobile account)
       </label>
     </div>
   </div>
       <div class="col-sm-4 mb-3">
-    <input type="text" class="form-control" placeholder="PIN" name="pin" maxlength="4" pattern="[0-9]{4}" title="Four digit pin code" disabled>
+    <input type="text" class="form-control" placeholder="PIN" name="pin" pattern="[0-9]{4}" title="Four digit pin code" disabled>
     </div>
 </div>
 
 
 <input type="hidden" name="des" value="{{data.destination}}">
-<input type="hidden" name="price" value="{{data.price}}">
+<input type="hidden" name="price" id="tprice" value="{{data.price}}">
 <input type="hidden" name="day" value="{{data.date}}">
 <input type="hidden" name="station" value="{{data.station}}">
 <input type="hidden" name="time" value="{{data.time}}">
 
-<div style="margin-left:50px; margin-right:auto;">
+<div style="margin-left:20px; margin-right:auto;">
 <button class="buttons buttonC"><h1>Pay Now</h1></button>
 </div>
 </fieldset>
