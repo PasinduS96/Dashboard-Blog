@@ -1,0 +1,35 @@
+{{#each errors}}
+<div class="alert alert-danger">{{text}}</div>
+{{else}}
+
+{{/each}}
+
+<div class="card card-body" style="margin-bottom: 30px;">
+    <h1 class="text-center"><img class="logo11" src="/img/publish.svg" /></h1>
+    <form action="/news/{{news.id}}" method="POST">
+        <div class="from-group mb-3">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" value="{{news.title}}" required>
+        </div>
+        <div class="from-group mb-3">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" name="description" value="{{news.description}}" required>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label class="my-1 mr-2" for="category">Category</label>
+                <select class="custom-select my-1 mr-sm-2" name="category">
+                    <option selected>{{news.category}}</option>
+                    <option value='Breaking'>Breaking News</option>
+                    <option value='Health'>Health</option>
+                    <option value='General'>General</option>
+                </select>
+            </div>
+        </div>
+        <div class="from-group mb-5">
+            <label for="news">News</label>
+            <textarea type="text" class="form-control" name="news" rows=10 required>{{news.news}}</textarea>
+        </div>
+        <button type="submit" class="buttons buttonC center">Submit</button>
+    </form>
+</div>

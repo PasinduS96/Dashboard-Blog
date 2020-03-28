@@ -1,64 +1,26 @@
-<div class="text-center">
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="margin-left:auto;margin-right:auto;">
-    <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-  </ol>
-  
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="/img/img3.png" alt="First slide" class="margin: auto;" >
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="/img/image1.png" alt="Second slide" >
-    </div>
-     <div class="carousel-item">
-      <img class="d-block w-100" src="/img/s1.png" alt="Second slide" >
-    </div>
-     <div class="carousel-item">
-      <img class="d-block w-100" src="/img/s2.png" alt="Second slide" >
-    </div>
-     <div class="carousel-item">
-      <img class="d-block w-100" src="/img/s3.png" alt="Second slide" >
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-</div>
-
-{{#if user}}
-<div class="container" style="margin-top:20px;">
-<div class="jumbotron text-center bg-dark" style="color:white;">
-  <h1 class="display-4">Hello, {{user.name}}&nbsp!</h1>
-  <p class="lead">Now You Can Buy Your All Train Tickets From One-Stop Shop With Trust</p>
-  <hr class="my-4">
-  <p>TrainTicketsLK provide ticket bookings for train rides which is for every availabe locations around the country </p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="/contentlogs" role="button">Start Bookings</a>
-  </p>
-</div>
-</div>
-
-{{else}}
-<div class="container" style="margin-top:20px;">
-<div class="jumbotron text-center bg-dark" style="color:white;">
-  <h1 class="display-4">Welcome To TrainTicketsLK!</h1>
-  <p class="lead">Are you looking for book your train tickets with trust?</p>
-  <hr class="my-4">
-  <p>Register with us now! You will have amazing discounts and offers for each deal </p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg"  style="margin-top:10px;" href="/user/register" role="button" ><img src="/img/user_add.png" alt="addlogo" class="nav-icon">&nbsp&nbsp&nbspRegister Now!</a>
-  </p>
-</div>
-</div>
-{{/if}}
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col"> Published Time</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each newses}}
+    <tr>
+      <td>{{title}}</td>
+      <td>{{description}}</td>
+      <td>{{publishedAt}}</td>
+      <td>
+        <a href="/news/edit/{{id}}" class="btn btn-dark" style="margin-bottom: 10px;">Edit News</a>
+        <a href="http://localhost:5000/news/deleteNews/{{id}}" class="btn btn-danger btn-block">Delete</a>
+        </form>
+      </td>
+    </tr>
+    {{else}}
+    <p>No News to display</p>
+    {{/each}}
+  </tbody>
+</table>

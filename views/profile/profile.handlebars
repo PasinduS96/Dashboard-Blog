@@ -1,0 +1,127 @@
+<div class="container">
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h2 class="mb-3">{{user.name}}</h2>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Email</h6>
+                            <p>
+                                {{user.email}}
+                            </p>
+                            <h6>NIC</h6>
+                            <p>
+                                {{user.nic}}
+                            </p>
+                            <h6>Phone Number</h6>
+                            <p>
+                                {{user.phone}}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Gender</h6>
+                            <p>
+                                {{user.gender}}
+                            </p>
+                            <h6>Registered Date</h6>
+                            <p>
+                                {{user.date}}
+                            </p>
+                        </div>
+
+
+                    </div>
+                    <!--/row-->
+                </div>
+
+                <div class="tab-pane" id="edit">
+                    <form action="/user/update/{{user.id}}" method="POST">
+                        <div class="container" style="display: block;margin-left: auto;margin-right: auto;width: 100%">
+                            <div class="form-row">
+                                <div class="col-md-7 mb-3">
+                                    <label for="name">Customer Name</label>
+                                    <input type="text" class="form-control" placeholder="Customer Name" name="name"
+                                        pattern="[a-zA-Z\s]+" title="User Name Can Not Contain Letters Or Characters"
+                                        value="{{user.name}}" required>
+                                    <div class="invalid-feedback">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-7 mb-3">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" class="form-control" name="email"
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                        placeholder="example@example.com" title="characters@characters.domain"
+                                        value="{{user.email}}" required>
+                                    {{#if error3}}
+                                    </br>
+                                    <div class="alert alert-light alert-dismissible"
+                                        style=" border: 1px solid red;border-radius: 12px;">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <p class="text-danger">{{error3}}</p>
+                                    </div>
+                                    {{else}}
+                                    {{/if}}
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="nic">National Identity Card(NIC) Number</label>
+                                    <input type="text" class="form-control" name="nic" placeholder="909090900V"
+                                        pattern="[a-zA-Z0-9]{10}" title="NIC must contain only 10 Characters"
+                                        value="{{user.nic}}" required>
+                                </div>
+                                <div class="col-md-5 mb-3 mx-4">
+                                    <label for="phone">Phone Nummber</label>
+                                    <input type="text" class="form-control" name="phone"
+                                        placeholder="Format:+94716281090" pattern="[\+]\d{2}[0-9]{9}"
+                                        title="Enter Your phone number with country code, Format:+94716281090"
+                                        value="{{user.phone}}">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="my-1 mr-2" for="gender">Gender</label>
+                                    <select class="custom-select my-1 mr-sm-2" name="gender">
+                                        <option selected>{{user.gender}}</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="my-1 mr-2" for="type">Type</label>
+                                    <select class="custom-select my-1 mr-sm-2" name="type">
+                                        <option selected>{{user.type}}</option>
+                                        <option value='Writter'>Writter</option>
+                                        <option value='Admin'>Admin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-success btn-block" type="submit">Update Profile</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <img src="/img/profile.svg" alt="logo"
+            style="display: block;margin-left: auto;margin-right: auto;width: 30%;margin-top: 30px;margin-bottom: 30px;">
+    </div>
+</div>
